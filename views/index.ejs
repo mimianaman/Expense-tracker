@@ -1,0 +1,39 @@
+<!-- views/index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Tracker</title>
+  </head>
+  <body>
+    <h1>Expense Tracker</h1>
+    <form action="/add" method="POST">
+      <input
+        type="text"
+        name="description"
+        placeholder="Description"
+        required
+      />
+      <input
+        type="number"
+        name="amount"
+        placeholder="Amount"
+        step="0.01"
+        required
+      />
+      <button type="submit">Add Expense</button>
+    </form>
+    <ul>
+      <% expenses.forEach(expense => { %>
+      <li>
+        <%= expense.description %>: $<%= expense.amount %>
+        <form action="/delete" method="POST" style="display: inline">
+          <input type="hidden" name="id" value="<%= expense.id %>" />
+          <button type="submit">Delete</button>
+        </form>
+      </li>
+      <% }) %>
+    </ul>
+  </body>
+</html>
